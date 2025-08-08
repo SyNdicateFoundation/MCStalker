@@ -89,8 +89,7 @@ public class Connection implements Runnable {
     public static class BinaryProtocolEncoder implements ProtocolEncoder {
         @Override
         public void encode(IoSession session, Object message, ProtocolEncoderOutput out) {
-            if (message instanceof byte[]) {
-                final byte[] packetBytes = (byte[]) message;
+            if (message instanceof byte[] packetBytes) {
                 final IoBuffer buffer = IoBuffer.allocate(packetBytes.length).setAutoExpand(true);
                 buffer.put(packetBytes);
                 buffer.flip();
